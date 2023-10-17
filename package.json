@@ -1,0 +1,42 @@
+{
+  "name": "battleship-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Steve Yardumian <syardumi@gmail.com>",
+  "license": "UNLICENSED",
+  "scripts": {
+    "lint": "eslint './src/**/*.{js,ts}'",
+    "lint:fix": "eslint './src/**/*.{js,ts}' --fix",
+    "lint-staged": "lint-staged",
+    "test": "npm run lint && TESTING=true LOG_SILENT=1 serverless-bundle test --coverage --runInBand",
+    "test:watch": "TESTING=true LOG_SILENT=1 serverless-bundle test --watch --colors --runInBand",
+    "clean": "rm -rf coverage node_modules .webpack .serverless"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "^29.4.0",
+    "@types/node": "^18.14.6",
+    "aws-sdk": "^2.1330.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "lint-staged": "^13.1.2",
+    "prettier": "^2.8.4",
+    "serverless-bundle": "^6.0.0",
+    "supertest": "^6.2.2",
+    "typescript": "^4.9.5"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "!src/index.ts"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!axios)/"
+    ]
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix"
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+.serverless
+.webpack
+
+# Editor artifacts
+# NOTE: We do not eliminate .vscode here! Instead, .vscode should have
+# project-specific configuration tightly controlled to not include any
+# personal preferences. That way we can commit it and things like prettier
+# and eslint integrations are solid for everyone.
+.*.sw*
+
+# Operating system artifacts
+.DS_Store
+
+# Build and test artifacts
+*.log
+dist
+build
+coverage
+
+# Yarn version locking
+.yarn
+.yarnrc
+
+*/*/sls-package-output
+*/*/__fixtures__/*/___*
+*/*/public/reader/main.js
+__local__
+.vscode

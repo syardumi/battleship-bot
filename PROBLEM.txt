@@ -1,0 +1,7 @@
+Defender NPC: Place ships randomly
+	- 5, 4, 3, 3, 2 in a 10x10 grid
+  - randomly choose orientation, then place (horiz: can start anywhere in [0 -> n - ship length, 0 -> 10]; vert: [0 -> 10, 0 -> n - ship length])
+    - if overlaps prev ship, start over
+Attacker NPC: Guess Algo
+	- minimize guesses to sink all ships
+	- take average # of guesses over n games
