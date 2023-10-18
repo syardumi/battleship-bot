@@ -5,3 +5,6 @@ Defender NPC: Place ships randomly
 Attacker NPC: Guess Algo
 	- minimize guesses to sink all ships
 	- take average # of guesses over n games
+
+
+RANDOM GUESS + DUMB SHIP SUBROUTINE: ~66 guesses

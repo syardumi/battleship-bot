@@ -1,10 +1,25 @@
 import { Ship } from './ship'
 
+async function waitKeyPressed() {
+  return new Promise((resolve) => {
+    const wasRaw = process.stdin.isRaw
+    process.stdin.setRawMode(true)
+    process.stdin.resume()
+    process.stdin.once('data', (data) => {
+      process.stdin.pause()
+      process.stdin.setRawMode(wasRaw)
+      resolve(data.toString())
+    })
+  })
+}
+
 export class Board {
   shipGrid: boolean[][]
   guessGrid: boolean[][]
+  guessCount: number
 
   constructor() {
+    this.guessCount = 0
     this.shipGrid = [[], [], [], [], [], [], [], [], [], []]
     this.guessGrid = [[], [], [], [], [], [], [], [], [], []]
     for (let i = 0; i < 10; i++) {
@@ -48,7 +63,7 @@ export class Board {
     }
   }
 
-  public canGuess(coord: { x: number; y: number }) {
+  public canGuess(coord: { x: number; y: number }): boolean {
     return (
       coord.x >= 0 &&
       coord.x < 10 &&
@@ -58,8 +73,9 @@ export class Board {
     )
   }
 
-  public doGuess(coord: { x: number; y: number }) {
+  public doGuess(coord: { x: number; y: number }): void {
     this.guessGrid[coord.x][coord.y] = true
+    this.guessCount++
   }
 
   public isHit(coord: { x: number; y: number }): boolean {
@@ -76,7 +92,8 @@ export class Board {
     return true
   }
 
-  public print() {
+  public async print(): Promise<void> {
+    console.log(`==========${this.guessCount}==========`)
     console.log('---------------------')
     for (let j = 0; j < 10; j++) {
       let line = '|'
@@ -90,5 +107,7 @@ export class Board {
       console.log(line)
       console.log('---------------------')
     }
+    console.log('\n')
+    // await waitKeyPressed()
   }
 }
