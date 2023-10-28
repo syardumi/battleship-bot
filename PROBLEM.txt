@@ -6,5 +6,10 @@ Attacker NPC: Guess Algo
 	- minimize guesses to sink all ships
 	- take average # of guesses over n games
 
+17 hits to win
 
-RANDOM GUESS + DUMB SHIP SUBROUTINE: ~66 guesses
+DUMB SHIP SUBROUTINE:
+- RANDOM GUESS: ~66.2 guesses (49.2 misses)
+- CHECKERBOARD: ~63.6 guesses (46.6 misses)
+- HORIZ/VERT SNAKE:
+- DIAG SNAKE:

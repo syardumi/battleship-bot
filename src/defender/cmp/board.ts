@@ -108,6 +108,6 @@ export class Board {
       console.log('---------------------')
     }
     console.log('\n')
-    // await waitKeyPressed()
+    await waitKeyPressed()
   }
 }

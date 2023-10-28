@@ -1,6 +1,7 @@
 import { Defender, getRandomInt } from './defender'
 
-const NUM_RUNS = 25000
+const NUM_RUNS = 25e3
+const DEBUG = false
 const runs = []
 
 const run = async () => {
@@ -16,7 +17,7 @@ const run = async () => {
     // left
     if (defender.board.canGuess({ x: x - 1, y })) {
       defender.board.doGuess({ x: x - 1, y })
-      // await defender.board.print()
+      if (DEBUG) await defender.board.print()
       if (defender.board.isHit({ x: x - 1, y }))
         await hitSubroutine({ x: x - 1, y })
     }
@@ -25,7 +26,7 @@ const run = async () => {
     // up
     if (defender.board.canGuess({ x, y: y - 1 })) {
       defender.board.doGuess({ x, y: y - 1 })
-      // await defender.board.print()
+      if (DEBUG) await defender.board.print()
       if (defender.board.isHit({ x, y: y - 1 }))
         await hitSubroutine({ x, y: y - 1 })
     }
@@ -34,7 +35,7 @@ const run = async () => {
     // right
     if (defender.board.canGuess({ x: x + 1, y })) {
       defender.board.doGuess({ x: x + 1, y })
-      // await defender.board.print()
+      if (DEBUG) await defender.board.print()
       if (defender.board.isHit({ x: x + 1, y }))
         await hitSubroutine({ x: x + 1, y })
     }
@@ -43,29 +44,61 @@ const run = async () => {
     // down
     if (defender.board.canGuess({ x, y: y + 1 })) {
       defender.board.doGuess({ x, y: y + 1 })
-      // await defender.board.print()
+      if (DEBUG) await defender.board.print()
       if (defender.board.isHit({ x, y: y + 1 }))
         await hitSubroutine({ x, y: y + 1 })
     }
   }
 
-  do {
-    // completely random
+  // checkerboard pattern
+  // for (let y = 0; y < 10; y++) {
+  //   // y
+  //   for (let j = 0; j < 5; j++) {
+  //     // x
+  //     const x = j * 2 + (y % 2)
+  //     if (defender.board.canGuess({ x, y })) {
+  //       defender.board.doGuess({ x, y })
+  //       if (DEBUG) await defender.board.print()
+  //       if (defender.board.isHit({ x, y })) await hitSubroutine({ x, y })
+  //     }
+  //     if (defender.board.allSunk()) break
+  //   }
+  //   if (defender.board.allSunk()) break
+  // }
+
+  // modified checkerboard pattern
+  // for (let i = 0; i < 5; i++) {
+  //   // y
+  //   const y = i * 2
+  //   for (let j = 0; j < 5; j++) {
+  //     // x
+  //     const x = j * 2 + (y % 2)
+  //     if (defender.board.canGuess({ x, y })) {
+  //       defender.board.doGuess({ x, y })
+  //       if (DEBUG) await defender.board.print()
+  //       if (defender.board.isHit({ x, y })) await hitSubroutine({ x, y })
+  //     }
+  //     if (defender.board.allSunk()) break
+  //   }
+  //   if (defender.board.allSunk()) break
+  // }
+
+  // TODO: snake horiz/vert sweep
+
+  // TODO: snake diag sweep
+
+  // completely random
+  while (!defender.board.allSunk()) {
     const x = getRandomInt(0, 9)
     const y = getRandomInt(0, 9)
 
-    // TODO: checkerboard pattern
-
-    // TODO: snake horiz/vert sweep
-
-    // TODO: snake diag sweep
-
     if (defender.board.canGuess({ x, y })) {
       defender.board.doGuess({ x, y })
-      // await defender.board.print()
+      if (DEBUG) await defender.board.print()
       if (defender.board.isHit({ x, y })) await hitSubroutine({ x, y })
     }
-  } while (!defender.board.allSunk())
+  }
+
   runs.push(defender.board.guessCount)
 }
 
